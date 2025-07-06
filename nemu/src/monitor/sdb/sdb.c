@@ -49,13 +49,13 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
-  nemu_state.state = NEMU_QUIT;
-  if (nemu_state.halt_ret != 0) {
-    printf("NEMU has exited with code %d.\n", nemu_state.halt_ret);
-  } else {
-    printf("NEMU has exited successfully.\n");
-  }
-  printf("Bye!\n");
+  // nemu_state.state = NEMU_QUIT;
+  // if (nemu_state.halt_ret != 0) {
+  //   printf("NEMU has exited with code %d.\n", nemu_state.halt_ret);
+  // } else {
+  //   printf("NEMU has exited successfully.\n");
+  // }
+  // printf("Bye!\n");
   return -1;
 }
 
