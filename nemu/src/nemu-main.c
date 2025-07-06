@@ -31,5 +31,7 @@ int main(int argc, char *argv[]) {
   /* Start engine. */
   engine_start();
 
-  return is_exit_status_bad();
+  // make Error x的x对应的就是程序return的值, 只有返回0才不会出错
+  // https://stackoverflow.com/questions/21366896/makefile-error-that-works-fine-in-console
+  return is_exit_status_bad();  
 }
