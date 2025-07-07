@@ -63,8 +63,19 @@ static int cmd_q(char *args) {
 static int cmd_si(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
-  printf("args = %s , arg = %s\n", args, arg);
+  int n = 1; // default step count is 1
 
+  if (arg != NULL) {
+    n = atoi(arg);
+    if (n <= 0) {
+      printf("Invalid step count: %s\n", arg);
+    } else {
+      cpu_exec(n);
+    }
+  } else {
+    cpu_exec(n);
+  }
+  
   return 0;
 }
 
@@ -86,8 +97,7 @@ static struct {
 
 static int cmd_help(char *args) {
   /* extract the first argument */
-  //char *arg = strtok(NULL, " ");
-  char *arg = args;
+  char *arg = strtok(NULL, " ");
   int i;
 
   if (arg == NULL) {
