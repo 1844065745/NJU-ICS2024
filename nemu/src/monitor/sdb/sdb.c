@@ -85,6 +85,10 @@ static int cmd_info(char *args) {
   if (arg != NULL) {
     if (strcmp(arg, "r") == 0) {
       isa_reg_display();
+    } else if (strcmp(arg, "w") == 0) {
+      // extern void print_wp();
+      // print_wp();
+      printf("(Watchpoints are not implemented yet.)\n");
     } else if (strcmp(arg, "c") == 0) {
       printf("NEMU state: %s\n", nemu_state.state == NEMU_RUNNING ? "RUNNING" : "HALTED");
       printf("Halt PC: 0x%08x\n", nemu_state.halt_pc);
