@@ -125,7 +125,7 @@ static int cmd_x(char *args) {
 
     uint32_t *addr_host = (uint32_t *)guest_to_host(expr_addr);
     for (int i = 0; i < N; i++) {
-      uint32_t value = *(volatile uint32_t *)(addr_host + i);
+      uint32_t value = *(addr_host + i);
       printf("0x%08x: 0x%08x\n", expr_addr + i * 4, value);
     }
   }
