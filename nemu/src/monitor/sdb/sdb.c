@@ -103,11 +103,25 @@ static int cmd_info(char *args) {
     }
   }
   else {
-    printf("Usage: info |r|w|c|\n");
+    printf("Usage: info <r|w|c>\n");
     printf("  r - print registers\n");
     printf("  w - print watchpoints (not implemented yet)\n");
     printf("  c - print NEMU state and halt information\n");
   }
+  return 0;
+}
+
+static int cmd_x(char *args) {
+  /* extract the first argument */
+  char *arg1 = strtok(NULL, " ");
+  char *arg2 = strtok(NULL, " ");
+  
+  if (arg1 == NULL || arg2 == NULL) {
+    printf("Usage: x <N> <address>\n");
+  } else {
+    printf("arg1 = %s, arg2 = %s\n", arg1, arg2);
+  }
+
   return 0;
 }
 
@@ -121,6 +135,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Execute N step(s)", cmd_si },
   { "info", "Print program state", cmd_info },
+  { "x", "Scan memory", cmd_x },
 
   /* TODO: Add more commands */
 
