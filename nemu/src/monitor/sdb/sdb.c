@@ -116,14 +116,20 @@ static int cmd_x(char *args) {
   /* extract the first argument */
   char *arg_N = strtok(NULL, " ");
   char *arg_EXPR = strtok(NULL, " ");
+
   
   if (arg_N == NULL || arg_EXPR == NULL) {
     printf("Usage: x <N> <EXPR>\n");
   } else {
-    printf("N = %s, EXPR = %s\n", arg_N, arg_EXPR);
-    uint8_t *addr = guest_to_host(0x80000000);           // 你想读取的地址
-    uint8_t value = *(volatile uint8_t *)addr;  // 强制类型转换 + volatile
-    printf("Byte at address %p: 0x%x\n", addr, value);
+    int N = atoi(arg_N);                  // 读取个数
+    uint32_t expr_addr = strtoul(arg_EXPR, NULL, 0);  // 将表达式解析为地址
+    printf("N = %d, EXPR = 0x%x\n", N, expr_addr);
+
+    uint32_t *addr_host = (uint32_t *)guest_to_host(expr_addr);
+    for (int i = 0; i < N; i++) {
+      uint32_t value = *(volatile uint32_t *)(addr_host + i);
+      printf("0x%08x: 0x%08x\n", expr_addr + i * 4, value);
+    }
   }
 
   return 0;
