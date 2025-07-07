@@ -42,11 +42,12 @@ static char* rl_gets() {
   return line_read;
 }
 
+static int cmd_help(char *args);
+
 static int cmd_c(char *args) {
-  cpu_exec(10);
+  cpu_exec(-1);
   return 0;
 }
-
 
 static int cmd_q(char *args) {
   nemu_state.state = NEMU_QUIT;
@@ -59,7 +60,13 @@ static int cmd_q(char *args) {
   return -1;
 }
 
-static int cmd_help(char *args);
+static int cmd_si(char *args) {
+  /* extract the first argument */
+  char *arg = strtok(NULL, " ");
+  printf("Executing %s command...\n", arg ? "si" : "si 1");
+
+  return 0;
+}
 
 static struct {
   const char *name;
@@ -69,6 +76,7 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
+  { "si", "Execute N step(s)", cmd_si },
 
   /* TODO: Add more commands */
 
