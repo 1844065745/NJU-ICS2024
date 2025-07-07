@@ -96,6 +96,7 @@ static int cmd_info(char *args) {
     } else if (strcmp(arg, "c") == 0) {
       printf("NEMU state: %s\n", nemu_state.state == NEMU_RUNNING ? "RUNNING" : "HALTED");
       printf("Halt PC: 0x%08x\n", nemu_state.halt_pc);
+      printf("cpu PC: 0x%08x\n", cpu.pc);
       printf("Halt return value: %d\n", nemu_state.halt_ret);
     } else {
       printf("Unknown argument '%s' for 'info' command.\n", arg);
