@@ -123,7 +123,7 @@ static int cmd_x(char *args) {
     printf("N = %s, EXPR = %s\n", arg_N, arg_EXPR);
     uint8_t *addr = guest_to_host(0x80000000);           // 你想读取的地址
     uint8_t value = *(volatile uint8_t *)addr;  // 强制类型转换 + volatile
-    printf("Byte at address %p: 0x%02x\n", addr, value);
+    printf("Byte at address %p: 0x%x\n", addr, value);
   }
 
   return 0;
