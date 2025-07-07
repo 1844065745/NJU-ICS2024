@@ -63,7 +63,7 @@ static int cmd_q(char *args) {
 static int cmd_si(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
-  printf("Executing %s command...\n", arg ? "si" : "si 1");
+  printf("args = %s , arg = %s\n", args, arg);
 
   return 0;
 }
