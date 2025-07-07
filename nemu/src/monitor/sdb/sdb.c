@@ -113,13 +113,16 @@ static int cmd_info(char *args) {
 
 static int cmd_x(char *args) {
   /* extract the first argument */
-  char *arg1 = strtok(NULL, " ");
-  char *arg2 = strtok(NULL, " ");
+  char *arg_N = strtok(NULL, " ");
+  char *arg_EXPR = strtok(NULL, " ");
   
-  if (arg1 == NULL || arg2 == NULL) {
-    printf("Usage: x <N> <address>\n");
+  if (arg_N == NULL || arg_EXPR == NULL) {
+    printf("Usage: x <N> <EXPR>\n");
   } else {
-    printf("arg1 = %s, arg2 = %s\n", arg1, arg2);
+    printf("N = %s, EXPR = %s\n", arg_N, arg_EXPR);
+    uintptr_t addr = 0x80000000;           // 你想读取的地址
+    uint32_t value = *(volatile uint32_t *)addr;  // 强制类型转换 + volatile
+    printf("Value at address 0x%08lx: 0x%08x\n", addr, value);
   }
 
   return 0;
