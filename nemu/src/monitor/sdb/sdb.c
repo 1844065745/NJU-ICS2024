@@ -98,8 +98,9 @@ static int cmd_info(char *args) {
     }
   }
   else {
-    printf("Usage: info <r|c>\n");
+    printf("Usage: info <r|w|c>\n");
     printf("  r - print registers\n");
+    printf("  w - print watchpoints (not implemented yet)\n");
     printf("  c - print NEMU state and halt information\n");
   }
   return 0;
