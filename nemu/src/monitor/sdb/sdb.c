@@ -18,6 +18,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include <memory/paddr.h>
 
  #define CLOSE "\001\033[0m\002" // 关闭所有属性
  #define BLOD "\001\033[1m\002" // 强调、加粗、高亮
@@ -120,9 +121,9 @@ static int cmd_x(char *args) {
     printf("Usage: x <N> <EXPR>\n");
   } else {
     printf("N = %s, EXPR = %s\n", arg_N, arg_EXPR);
-    uintptr_t addr = 0x80000000;           // 你想读取的地址
-    uint32_t value = *(volatile uint32_t *)addr;  // 强制类型转换 + volatile
-    printf("Value at address 0x%08lx: 0x%08x\n", addr, value);
+    uint8_t *addr = guest_to_host(0x80000000);           // 你想读取的地址
+    uint8_t value = *(volatile uint8_t *)addr;  // 强制类型转换 + volatile
+    printf("Byte at address %p: 0x%02x\n", addr, value);
   }
 
   return 0;
