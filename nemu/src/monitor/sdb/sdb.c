@@ -59,9 +59,9 @@ static int cmd_q(char *args) {
   if (nemu_state.halt_ret != 0) {
     printf("NEMU has exited with code %d.\n", nemu_state.halt_ret);
   } else {
-    printf("NEMU has exited successfully.\n");
+    // printf("NEMU has exited successfully.\n");
+    printf("Bye!\n");
   }
-  printf("Bye!\n");
   return -1;
 }
 
@@ -113,17 +113,15 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
-  /* extract the first argument */
+  /* extract the argumens */
   char *arg_N = strtok(NULL, " ");
   char *arg_EXPR = strtok(NULL, " ");
-
   
   if (arg_N == NULL || arg_EXPR == NULL) {
     printf("Usage: x <N> <EXPR>\n");
   } else {
     int N = atoi(arg_N);                  // 读取个数
     uint32_t expr_addr = strtoul(arg_EXPR, NULL, 0);  // 将表达式解析为地址
-    printf("N = %d, EXPR = 0x%x\n", N, expr_addr);
 
     uint32_t *addr_host = (uint32_t *)guest_to_host(expr_addr);
     for (int i = 0; i < N; i++) {
