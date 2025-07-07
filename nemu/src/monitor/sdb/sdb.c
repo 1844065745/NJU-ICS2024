@@ -75,7 +75,29 @@ static int cmd_si(char *args) {
   } else {
     cpu_exec(n);
   }
-  
+  return 0;
+}
+
+static int cmd_info(char *args) {
+  /* extract the first argument */
+  char *arg = strtok(NULL, " ");
+
+  if (arg != NULL) {
+    if (strcmp(arg, "r") == 0) {
+      isa_reg_display();
+    } else if (strcmp(arg, "c") == 0) {
+      printf("NEMU state: %s\n", nemu_state.state == NEMU_RUNNING ? "RUNNING" : "HALTED");
+      printf("Halt PC: 0x%08x\n", nemu_state.halt_pc);
+      printf("Halt return value: %d\n", nemu_state.halt_ret);
+    } else {
+      printf("Unknown argument '%s' for 'info' command.\n", arg);
+    }
+  }
+  else {
+    printf("Usage: info <r|c>\n");
+    printf("  r - print registers\n");
+    printf("  c - print NEMU state and halt information\n");
+  }
   return 0;
 }
 
@@ -88,6 +110,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Execute N step(s)", cmd_si },
+  { "info", "Print program state", cmd_info },
 
   /* TODO: Add more commands */
 
